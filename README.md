@@ -1,2 +1,3 @@
-# xixi-web
-[Website] The main website of Xixi's Wonderland.
+# Wondercraft Website<sub><sup> · A Minecraft Server Website</sup></sub>
+
+The main website of Wondercraft.
