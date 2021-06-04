@@ -1,0 +1,685 @@
+$codeBgColor: #fbfcfd !default;
+$codeBorderColor: #eaecef !default;
+$codeLineBorderColor: #f0f2f4 !default;
+
+:root {
+  scroll-behavior: smooth;
+}
+
+#app {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #161616;
+}
+
+.theme-default-content pre code, .theme-default-content pre[class*=language-] code {
+  color: #3a385d;
+}
+
+.theme-default-content code {
+  font-family: SF Mono, Meno, monospace;
+  font-weight: 400;
+  padding: 0rem 0.15rem;
+  margin: 0;
+  background-color: transparent;
+  letter-spacing: 0;
+  font-size: 1em;
+  .token {
+    &.deleted {
+      color: #ec5975;
+    }
+    &.inserted {
+      color: #287df0;
+    }
+  }
+}
+
+.theme-default-content a code {
+  color: #287df0;
+}
+
+.theme-default-content pre,
+.theme-default-content pre[class*="language-"] {
+	line-height: 1.4;
+	padding: 1.25rem 1.5rem;
+	margin: 0.85rem 0;
+	background-color: $codeBgColor;
+	border-radius: 12px;
+	overflow: auto;
+}
+.theme-default-content pre code,
+.theme-default-content pre[class*="language-"] code {
+	color: #3a385d;
+	padding: 0;
+	background-color: transparent;
+	border-radius: 0;
+  font-size: 0.85em;
+  .token {
+    &.deleted {
+      color: #ec5975;
+    }
+    &.inserted {
+      color: #287df0;
+    }
+  }
+}
+div[class*="language-"] {
+	position: relative;
+	background-color: $codeBgColor;
+	.highlight-lines {
+		background-color: $codeBgColor;
+		color: #3a385d;
+		user-select: none;
+		padding-top: 1.3rem;
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		line-height: 1.4;
+		.highlighted {
+			background-color: #f3edd1;
+		}
+	}
+}
+div[class*="language-"] pre,
+div[class*="language-"] pre[class*="language-"] {
+	background: transparent;
+	position: relative;
+	z-index: 1;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+div[class*="language-"]::before {
+	position: absolute;
+	z-index: 3;
+	top: 0.8em;
+	right: 1em;
+	font-size: 0.75rem;
+	color: #00000c;
+}
+div[class*="language-"]:not(.line-numbers-mode) {
+	.line-numbers-wrapper {
+		display: none;
+	}
+}
+div[class*="language-"].line-numbers-mode {
+	.highlight-lines {
+		.highlighted {
+			position: relative;
+			&:before {
+				content: ' ';
+				position: absolute;
+				z-index: 3;
+				left: 0;
+				top: 0;
+				display: block;
+				width: 3.5rem;
+				height: 100%;
+				background-color: #f3edd1;
+			}
+		}
+	}
+	pre {
+		padding-left: 1.6rem;
+		vertical-align: middle;
+	}
+	.line-numbers-wrapper {
+		position: absolute;
+		top: 0;
+		width: 3.5rem;
+		text-align: center;
+		color: rgba(255,255,255,0.3);
+		padding: 1.25rem 0;
+		line-height: 1.4;
+		br {
+			user-select: none;
+		}
+		.line-number {
+			position: relative;
+			z-index: 4;
+			user-select: none;
+			font-size: 0.85em;
+		}
+	}
+	&::after {
+		content: '';
+		position: absolute;
+		z-index: 2;
+		top: 0;
+		left: 0;
+		width: 3.5rem;
+		height: 100%;
+		// border-radius: 12px 0 0 12px;
+		border-right: 1px solid $codeBorderColor;
+		background-color: $codeBgColor !important;
+	}
+}
+
+// ==============================
+// MARK: - 响应式代码段
+
+@media screen and (max-width: 719px) {
+  div[class*="language-"].line-numbers-mode {
+    max-width: 100vw;
+    margin-left: -15px !important;
+    margin-right: -15px !important;
+    border-radius: 8px !important;
+    border: 0.2px solid $codeBorderColor;
+    &::after {
+      border-radius: 8px 0 0 8px;
+    }
+  }
+}
+@media screen and (min-width: 720px) {
+  div[class*="language-"].line-numbers-mode {
+    max-width: 100vw;
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+    border-radius: 12px !important;
+    border: 0.2px solid $codeBorderColor;
+    &::after {
+      border-radius: 12px 0 0 12px;
+    }
+  }
+}
+
+// ==============================
+// MARK: - 锚地固定位置
+
+.theme-default-content:not(.custom)>h1,
+.theme-default-content:not(.custom)>h2,
+.theme-default-content:not(.custom)>h3,
+.theme-default-content:not(.custom)>h4,
+.theme-default-content:not(.custom)>h5,
+.theme-default-content:not(.custom)>h6 {
+  margin-top: -5.0rem;
+  padding-top: 6.5rem;
+}
+
+// ==============================
+// MARK: - 代码元素
+
+div {
+	&.reactivecontent {
+		width: 1000px;
+		margin-left: -100px;
+	}
+}
+.token {
+	&.punctuation {
+		color: #a8a9cc;
+	}
+}
+.token.tag,
+.token.attr-name,
+.token.namespace,
+.token.deleted {
+	color: #b2085f;
+}
+.token.string,
+.token.char,
+.token.attr-value,
+.token.regex,
+.token.variable {
+	color: #0a7a34;
+}
+.token.selector,
+.token.important,
+.token.atrule,
+.token.keyword,
+.token.builtin {
+	color: #b92dbc;
+}
+.token.boolean,
+.token.number,
+.token.function {
+	color: #c25205;
+}
+.token.property,
+.token.class-name,
+.token.constant,
+.token.symbol {
+	color: #717c11;
+}
+.token.operator,
+.token.entity,
+.token.url {
+	color: #0b7e7d;
+}
+.token.comment,
+.token.block-comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+	color: #848486;
+}
+div[class*=language-].line-numbers-mode .line-numbers-wrapper,
+div[class*=language-].line-numbers-mode:after {
+	background-color: $codeBgColor;
+	color: #c4c4c6;
+	border-right: 1px solid $codeLineBorderColor;
+}
+
+// ==============================
+// MARK: - 侧栏
+
+.sidebar {
+  position: absolute;
+  z-index: 20;
+  border-right: 1px solid #f4f4f4;
+}
+.sidebar-heading,
+.navbar-links-item a,
+.mobile-dropdown-title span {
+  font-weight: 500 !important;
+  font-size: 1.0rem;
+}
+a.sidebar-link.active,
+.navbar-links a.router-link-active {
+  font-weight: 500 !important;
+  color: #287df0 !important;
+  border-left-color: #287df0 !important;
+}
+
+// ==============================
+// MARK: - 头部
+
+.docs-header {
+  width: 100%;
+  height: 80px;
+  background-color: #fff;
+}
+.docs-header .container {
+  width: 100vw;
+  height: 79px;
+  max-width: 1280px;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  position: fixed;
+  z-index: 2000;
+}
+.header-logo-div {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+@media screen and (max-width: 1080px) {
+  .header-logo-div-container {
+    width: 240px;
+    height: 40px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    img {
+      width: 240px;
+      height: 40px;
+    }
+  }
+}
+@media screen and (min-width: 1081px) {
+  .header-logo-div-container {
+    width: 330px;
+    height: 55px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    img {
+      width: 330px;
+      height: 55px;
+    }
+  }
+}
+.header-logo-text {
+  font-size: 24px;
+  font-weight: 300;
+}
+.navigation {
+  height: 100%;
+  display: inline-block;
+  margin-left: 5px;
+}
+.navigation a,
+.navigation-link {
+  height: 100%;
+  font-size: 16px;
+  font-weight: 500;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin-left: 15px;
+  margin-right: 15px;
+  display: inline-flex;
+  vertical-align: middle;
+  & .el-dropdown {
+    margin: auto;
+    font-size: 16px;
+    color: #287df0;
+  }
+}
+.navigation-mobile {
+  display: flex;
+  flex-direction: column;
+}
+.navigation-mobile button {
+  text-align: left;
+
+  font-size: 16px;
+  font-weight: 600;
+
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.el-dropdown-menu__item {
+  font-size: 15px !important;
+  font-weight: 500;
+  &:focus, &:not(.is_disabled):hover {
+    color: #287df0 !important;
+    background-color: #fbfcfd !important;
+  }
+}
+
+// ==============================
+// MARK: - 全局响应式
+
+@media screen and (max-width: 719px) {
+  .for-desktop {
+    display: none !important;
+  }
+}
+@media screen and (min-width: 720px) {
+  .for-mobile {
+    display: none !important;
+  }
+}
+@media screen and (max-width: 1080px) {
+  .for-desktop {
+    display: none !important;
+  }
+}
+@media screen and (min-width: 1081px) {
+  .for-pad {
+    display: none !important;
+  }
+  .for-mobile {
+    display: none !important;
+  }
+}
+
+// MARK: - Custom Container
+
+.custom-container .custom-container-title {
+  font-weight: 500;
+  font-size: 18px;
+}
+
+// ==============================
+// MARK: - 禁止横向滚动
+
+.no-horizontal-scroll {
+  overflow-x: hidden;
+}
+
+// ==============================
+// MARK: - Cloak
+
+[v-cloak] {
+  display: none;
+}
+
+// ==============================
+// MARK: - 核心文档框架
+
+.main {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+@media screen and (max-width: 720px) {
+  .body {
+    position: absolute;
+    left: 0;
+    right: 0;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+  .content {
+    max-width: 1230px;
+    margin-left: 25px;
+    margin-right: 25px;
+    text-align: left;
+  }
+  .docs-sidebar {
+    max-width: 240px;
+    text-align: left;
+    padding-top: 0px;
+    top: 0px;
+  }
+}
+@media screen and (max-width: 1080px) {
+  .body {
+    position: absolute;
+    left: 0;
+    right: 0;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+  .content {
+    max-width: 1230px;
+    margin-left: 25px;
+    margin-right: 25px;
+    text-align: left;
+  }
+  .docs-sidebar {
+    max-width: 240px;
+    text-align: left;
+    padding-top: 0px;
+    top: 0px;
+  }
+  .sidebar .navbar-links {
+    display: inline-block !important;
+    width: 100%;
+  }
+  .navbar-links .navbar-links-item {
+    margin-left: 0px;
+  }
+  .navbar-links-item>a:not(.external).router-link-active,
+  .navbar-links-item>a:not(.external):hover {
+    border-bottom: 0px;
+  }
+}
+@media screen and (min-width: 1081px) {
+  .body {
+    position: absolute;
+    left: 0;
+    right: 0;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+  .content {
+    max-width: 944px;
+    margin-left: 326px;
+    margin-right: 20px;
+    text-align: left;
+  }
+  .docs-sidebar {
+    max-width: 276px;
+    text-align: left;
+    padding-top: 0px;
+    top: 0px;
+  }
+}
+.sidebar-mask {
+  position: fixed;
+  z-index: 9;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: none;
+}
+.docs-footer {
+  width: 100%;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+  font-size: 12px;
+  font-weight: 400;
+  color: #bfbfbf;
+  line-height: 1.0;
+}
+
+// ==============================
+// MARK: - Defined Elements 文字样式
+
+body {
+  margin: 0px;
+  width: 100%;
+}
+
+a {
+  color: #287df0;
+}
+
+@media screen and (max-width: 1080px) {
+  h1 {
+    font-size: 24px;
+  }
+  h2 {
+    font-size: 21px;
+  }
+  h3 {
+    font-size: 19px;
+  }
+  h4 {
+    font-size: 18px;
+  }
+  h5 {
+    font-size: 17px;
+  }
+  h6 {
+    font-size: 16px;
+  }
+  p {
+    font-size: 15px;
+  }
+}
+@media screen and (min-width: 1081px) {
+  h1 {
+    font-size: 40px;
+  }
+  h2 {
+    font-size: 30px;
+  }
+  h3 {
+    font-size: 22px;
+  }
+  h4 {
+    font-size: 20px;
+  }
+  h5 {
+    font-size: 18px;
+  }
+  h6 {
+    font-size: 17px;
+  }
+  p {
+    font-size: 16px;
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 500;
+  line-height: 1.65;
+}
+
+p {
+  font-weight: 350;
+  line-height: 1.65;
+}
+
+p strong {
+  font-weight: 450;
+  line-height: 1.65;
+}
+
+// ==============================
+// MARK: - Defined Elements 按钮样式
+
+.defined-link .el-link--inner,
+.defined-link-small .el-link--inner {
+  padding-left: 1px;
+  padding-right: 1px;
+  padding-bottom: 6px;
+}
+@media screen and (max-width: 1080px) {
+  .defined-link .el-link--inner {
+    font-size: 16px;
+  }
+  .defined-link-small .el-link--inner {
+    font-size: 14px;
+  }
+}
+@media screen and (min-width: 1081px) {
+  .defined-link .el-link--inner {
+    font-size: 18px;
+  }
+  .defined-link-small .el-link--inner {
+    font-size: 16px;
+  }
+}
+
+.el-link.el-link--default:hover,
+.el-link.el-link--primary {
+  color: #287df0 !important;
+}
+
+.el-link.el-link--default:after,
+.el-link.el-link--primary.is-underline:hover:after,
+.el-link.el-link--primary:after {
+  border-color: #287df0 !important;
+  border-bottom: 2px solid;
+}
+
+// ==============================
+// MARK: - Defined Elements Markdown 附加样式
+
+.defined-markdown-bar {
+  background-color: #fbfcfd;
+  border: 0.2px solid #eaecef;
+  padding-left: 19px;
+  padding-right: 19px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  margin-top: 21px;
+  margin-bottom: 21px;
+  font-size: 16px;
+  strong {
+    font-size: 16px;
+    font-weight: 600;
+    padding-right: 16px;
+    margin-right: 14px;
+    border-right: 1px solid #eaecef;
+  }
+}
+@media screen and (max-width: 1080px) {
+  .defined-markdown-bar {
+    border-radius: 8px;
+  }
+}
+@media screen and (min-width: 1081px) {
+  .defined-markdown-bar {
+    border-radius: 12px;
+  }
+}
